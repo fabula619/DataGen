@@ -1,11 +1,13 @@
+import java.sql.{Connection, DriverManager}
+
 import scala.collection.immutable.LinearSeq
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
 
 object Main {
   def main(args: Array[String]): Unit = {
-    var oif = new mutable.HashSet[ProductID]()
-    var seqProduct = ArrayBuffer[Product]()
+    val oif = new mutable.HashSet[ProductKey]()
+    val seqProduct = ArrayBuffer[Product]()
     val randomID = scala.util.Random
     val randomYear =  scala.util.Random
     val randomGroup = scala.util.Random
@@ -15,7 +17,7 @@ object Main {
     var counter = 0
     while(i<20000)
     {
-      val productID = ProductID(randomID.nextInt(20000),randomYear.nextInt(4)+2015)
+      val productID = ProductKey(randomID.nextInt(20000),randomYear.nextInt(4)+2015)
       if(oif.contains(productID))
         println("contains")
       else {
@@ -33,9 +35,17 @@ object Main {
       }
     };
     //oif.foreach { println }
-    seqProduct.foreach{println}
-    println(seqProduct.length +"size common all")
 
+     seqProduct.foreach {
+       println
+     }
+    try {
+      val connectDB = new ConnectDB()
+      connectDB.loadData(seqProduct)
+    }
+
+    println(seqProduct.length + "size common all")
     println("Hello, world!")
   }
+
 }
