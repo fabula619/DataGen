@@ -1,19 +1,15 @@
 import scala.collection.mutable.ArrayBuffer
 
-class Product(val productID: ProductKey,val productGroup: Int, val arrPurchases:ArrayBuffer[Int]) {
-  private var idX = productID
-  private var groupX = productGroup
+class Product(val productID: Int,val productGroup:Int, val productYear:Int, val arrPurchases:ArrayBuffer[Int]) {
+  private val idX = productID
+  private val groupX = productGroup
   private val purchasesX = arrPurchases
-  def id:ProductKey= id
-  def group:Int = group
+  private val yearX = productYear
+  def id: Int= idX
+  def year: Int= yearX
+  def group:Int= groupX
   def purchases:ArrayBuffer[Int] = purchasesX
-  def id_= (newValue: ProductKey): Unit = {
-    idX = newValue
-  }
-  def group_= (newValuee: Int): Unit = {
-  groupX = newValuee
-  }
   override def toString: String =
-    "(" + idX + ", " + groupX+", "+purchasesX+")"
+    "(" + idX + ", " + groupX+", "+yearX+")"
 }
 
